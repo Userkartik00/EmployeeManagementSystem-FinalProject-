@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="~{ base :: layout(~{::title} , ~{::section}) }">   <!------------ Calling Base Class ----------------->
+<head>
+<meta charset="UTF-8">
+<title>Employee Edit Form</title>
+
+</head>
+<body>
+    <section>
+    
+<!------------------------------- Font Size and text-location -------------------------------------->
+    
+     <div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header text-center">
+							<p class="fs-4">Edit Emp</p>         <!------ Edit Emp ---------->
+							<th:block th:if="${session.msg}">
+								<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+								<th:block th:text="${@empServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+						</div>
+						
+<!------------------------------- Bootstrap Form -------------------------------------->
+
+
+						<div class="card-body">
+							<form action="/updateEmpDtls" method="post">
+								<input type="hidden" name="id" th:value="${emp.id}">
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Full Name </label>  <!------ Full Name ---------->
+									<input type="text" class="form-control" name="name"
+										th:value="${emp.name}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Email address</label>  <!------ Email address ---------->
+									<input type="email" class="form-control" name="email"
+										th:value="${emp.email}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Address</label>  <!------ Address ----------> 
+									<input type="text" class="form-control" name="address"
+										th:value="${emp.address}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">Gender</label>  <!------ Gender ----------> 
+									
+	<!-------------- Bootstrap Checked Box ---------------------> 
+						
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="gender"
+											th:attrappend="checked=${emp.gender=='Male' ? 'checked' : ''}"
+											id="inlineRadio1" value="Male"> <label
+											class="form-check-label" for="inlineRadio1">Male</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="gender"
+											th:attrappend="checked=${emp.gender=='Female' ? 'checked' : ''}"
+											id="inlineRadio2" value="Female"> <label
+											class="form-check-label" for="inlineRadio2">Female</label>
+									</div>
+
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputPassword1" class="form-label">Password</label>  <!------ Password ----------> 
+									<input type="password" class="form-control" name="password"
+										th:value="${emp.password}" id="exampleInputPassword1">
+								</div>
+
+								<button type="submit" class="btn btn-primary">Update</button>   <!------ Submit Button ---------->
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>   
+</body>
+</html>
